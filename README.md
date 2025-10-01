@@ -1,17 +1,17 @@
-# CI/CD Pipeline with Docker and GitHub Actions
+# CI/CD Automation with Docker & GitHub Actions
 
-A complete demonstration of a Docker-based CI/CD pipeline using GitHub Actions for automated building, testing, and deployment of containerized applications.
+Automated CI/CD pipeline for containerized applications using Docker and GitHub Actions.
 
 ## Features
 
-- **Dockerized Flask Application**: Sample REST API with health checks
-- **Multi-stage Docker Builds**: Optimized image size and security
-- **GitHub Actions CI/CD**: Automated testing, building, and deployment
-- **Automated Testing**: Unit tests with pytest and coverage reporting
-- **Security Scanning**: Trivy vulnerability scanning
-- **Version Management**: Image tagging with commit SHA and semantic versioning
-- **Deployment Scripts**: Easy deployment and rollback mechanisms
-- **Local Development**: Docker Compose for development environment
+- Dockerized Flask REST API with health checks
+- Multi-stage Docker builds for optimized images
+- Automated CI/CD with GitHub Actions
+- Unit testing with pytest
+- Security scanning with Trivy
+- Semantic versioning and image tagging
+- Deployment and rollback scripts
+- Docker Compose for local development
 
 ## Project Structure
 
@@ -43,61 +43,36 @@ ci-cd/
 
 ### Prerequisites
 
-- Docker and Docker Compose installed
-- Python 3.11+ (for local development)
+- Docker and Docker Compose
+- Python 3.11+
 - Git
-- GitHub account (for CI/CD)
-- DockerHub account (for image registry)
+- GitHub account
+- DockerHub account
 
-### 1. Local Development
+### Local Development
 
 ```bash
-# Clone the repository
-git clone <your-repo-url>
-cd ci-cd
+# Clone repository
+git clone https://github.com/CJ445/ci-cd-automation.git
+cd ci-cd-automation
 
 # Install dependencies
-make install
+pip install -r requirements.txt
 
 # Run tests
-make test
+pytest tests/
 
-# Start development server with Docker Compose
-make run
-
-# Access the application
-curl http://localhost:5000/health
+# Start development server
+docker-compose up
 ```
 
-### 2. GitHub Setup
+### GitHub Actions Setup
 
-1. **Create GitHub Repository**
-   ```bash
-   git remote add origin <your-repo-url>
-   git push -u origin main
-   ```
-
-2. **Configure Secrets** (see [SECRETS_SETUP.md](SECRETS_SETUP.md))
-   - Add `DOCKERHUB_USERNAME` secret
-   - Add `DOCKERHUB_TOKEN` secret
-
-3. **Trigger Pipeline**
-   - Push to `main` branch triggers CI/CD
-   - Create PR triggers PR checks
-   - Create git tag `v*.*.*` triggers release
-
-### 3. Testing Locally
-
-```bash
-# Build Docker image
-make build
-
-# Test the built image
-make test-local
-
-# Run production-like container
-make run-prod
-```
+1. Fork/Clone this repository
+2. Add GitHub Secrets:
+   - `DOCKERHUB_USERNAME`: Your DockerHub username
+   - `DOCKERHUB_TOKEN`: DockerHub access token
+3. Push to main branch to trigger pipeline
 
 ## CI/CD Pipeline
 
@@ -306,12 +281,11 @@ docker stats cicd-demo-app
 
 ## Best Practices
 
-1. **Never commit secrets** - Use GitHub Secrets
-2. **Tag releases** - Use semantic versioning (v1.0.0)
-3. **Test locally** - Always test before pushing
-4. **Review logs** - Check pipeline logs for issues
-5. **Monitor deployments** - Verify health after deployment
-6. **Keep backups** - Rollback script creates automatic backups
+- Never commit secrets - use GitHub Secrets
+- Use semantic versioning for releases (v1.0.0)
+- Test locally before pushing
+- Monitor pipeline logs
+- Verify deployments with health checks
 
 ## Version Management
 
@@ -331,15 +305,6 @@ git push origin v1.0.0
 - **Minor version** (v1.0.0 → v1.1.0): New features
 - **Patch version** (v1.0.0 → v1.0.1): Bug fixes
 
-## Contributing
-
-1. Create feature branch
-2. Make changes
-3. Run tests locally
-4. Create pull request
-5. Wait for PR checks to pass
-6. Merge to main
-
 ## License
 
-This project is for educational and demonstration purposes.
+MIT License - See LICENSE file for details.

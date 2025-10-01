@@ -1,6 +1,6 @@
-# GitHub Secrets Configuration Guide
+# Secrets Setup
 
-This document explains how to set up the required secrets for the CI/CD pipeline to work with DockerHub.
+GitHub secrets configuration for CI/CD pipeline.
 
 ## Required Secrets
 
