@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: cicd-demo-app-dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - /app/__pycache__
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - APP_VERSION=dev
+      - BUILD_SHA=local
+      - ENVIRONMENT=development
+    restart: unless-stopped
+
+  # Production-like container for testing
+  app-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cicd-demo-app-prod
+    ports:
+      - "5001:5000"
+    environment:
+      - ENVIRONMENT=production
+      - APP_VERSION=local-prod
+    restart: unless-stopped
+    profiles:
+      - production
