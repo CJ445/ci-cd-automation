@@ -103,22 +103,23 @@ make run-prod
 
 ### Pipeline Stages
 
-1. **Build and Test**
+1. **Build and Test** ✅ (Runs on every push/PR)
    - Checkout code
    - Install dependencies
    - Run linting (flake8)
    - Run unit tests with coverage
    - Upload coverage reports
 
-2. **Docker Build and Push**
+2. **Docker Build and Push** ✅ (Runs on push to main/develop)
    - Build multi-stage Docker image
    - Run security scanning (Trivy)
    - Push to DockerHub with multiple tags
    - Test container health
 
-3. **Create Release** (for version tags)
+3. **Create Release** ⚠️ (Only runs when pushing version tags like `v1.0.0`)
    - Create GitHub release
    - Attach image information
+   - **Note**: This job is SKIPPED on regular pushes to main
 
 ### Image Tagging Strategy
 
@@ -134,6 +135,8 @@ Images are tagged with:
 - **Push to `develop`**: Build and test only
 - **Pull Request**: Linting, testing, Docker build (no push)
 - **Git Tag `v*.*.*`**: Full pipeline + GitHub release
+
+> **⚠️ Important**: The "Create Release" job only runs when you push a version tag (e.g., `v1.0.0`). Regular pushes to `main` will skip this job. To trigger a release, you must create and push a git tag.
 
 ## Deployment
 

@@ -47,6 +47,9 @@ git push -u origin main
    - ✅ Run tests
    - ✅ Build Docker image
    - ✅ Push to DockerHub as `cj445/ci-cd-automation:latest`
+   - ⏭️ **Skip** "Create Release" job (only runs for version tags)
+
+> **💡 Note**: You'll see the "create-release" job skipped. This is normal! It only runs when you push a version tag (see below).
 
 ---
 
@@ -80,6 +83,10 @@ docker stop my-app && docker rm my-app
 
 ## 🚀 Create Your First Release
 
+**⚠️ This step is REQUIRED to trigger the "Create Release" job!**
+
+The release job only runs when you push version tags. Regular pushes skip it.
+
 ```bash
 # Create version tag
 git tag -a v1.0.0 -m "Release version 1.0.0"
@@ -89,9 +96,9 @@ git push origin v1.0.0
 ```
 
 This triggers:
-- Full pipeline
+- Full pipeline (all 3 jobs)
 - Image tagged: `v1.0.0`, `v1.0`, `v1`, `latest`
-- GitHub Release created automatically
+- **GitHub Release created automatically** (not skipped this time!)
 
 ---
 
