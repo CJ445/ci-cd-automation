@@ -95,8 +95,8 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            # Tag with commit SHA
-            type=sha,prefix={{branch}}-,format=short
+            # Tag with commit SHA (use sha type without prefix for tags)
+            type=sha,format=short
             # Tag as latest for main branch
             type=raw,value=latest,enable={{is_default_branch}}
           labels: |
